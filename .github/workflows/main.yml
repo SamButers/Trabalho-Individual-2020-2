@@ -20,11 +20,20 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           
-      - name: Run Client Tests
+      - name: Setup Client
         working-directory: client
         run: |
           yarn install
-          yarn test:unit:ci
+          yarn global add eslint
+          yarn add eslint-plugin-vue
+          
+      - name: Run Client Tests
+        working-directory: client
+        run: yarn test:unit:ci
+          
+      - name: Run Client Lint
+        working-directory: client
+        run: yarn lint
           
   api:
     runs-on: ubuntu-latest
