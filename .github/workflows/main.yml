@@ -40,6 +40,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: client
+          args: >
+            -Dsonar.projectKey=SamButers_Trabalho-Individual-2020-2
+            -Dsonar.organization=sambuters
           
   api:
     runs-on: ubuntu-latest
