@@ -1,0 +1,20 @@
+name: CI
+on:
+  workflow_dispatch:
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Build and Deploy
+        if: ${{ github.event_name == 'push' }}
+        uses: gonuit/heroku-docker-deploy@v1.3.3
+        with:
+          heroku_app_name: sambuters-gces
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          dockerfile_directory: ./
+          dockerfile_name: docker-compose.yml
