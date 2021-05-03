@@ -54,11 +54,11 @@ jobs:
         with:
           python-version: '3.8'
           
-      - name: Install API requirements
+      - name: Install API Requirements
         working-directory: api
         run: pip install -r requirements.txt
         
-      - name: Run API migrations
+      - name: Run API Migrations
         working-directory: api
         run: python manage.py migrate
         env:
@@ -67,7 +67,7 @@ jobs:
           POSTGRES_DB: myproject
           POSTGRES_PORT: 5432
           
-      - name: Run API tests
+      - name: Run API Tests
         working-directory: api
         run: |
           coverage run manage.py test
@@ -75,4 +75,4 @@ jobs:
 
       - name: Run API Lint
         working-directory: api
-        run: pylint --load-plugins pylint_django *.py --fail-under=10
+        run: pylint --load-plugins pylint_django *.py --fail-under=4
