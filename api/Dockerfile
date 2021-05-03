@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install django djangorestframework psycopg2 django-cors-headers
+RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
