@@ -6,7 +6,7 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
-jobs:
+jobs: 
   client:
     runs-on: ubuntu-latest
     
@@ -34,17 +34,40 @@ jobs:
       - name: Run Client Lint
         working-directory: client
         run: yarn lint
-        
-      - uses: SonarSource/sonarcloud-github-action@v1.6
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: client
           
   api:
     runs-on: ubuntu-latest
+    services:
+      api-db:
+        image: postgres
+        env:
+          POSTGRES_USER: myuser
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: myproject
+          POSTGRES_PORT: 5432
+        ports:
+          - 5432:5432
     
     steps:
-    - name: To be implemented
-      run: echo To be implemented.
-      
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+          
+      - name: Install API requirements
+        working-directory: api
+        run: pip install -r requirements.txt
+        
+      - name: Run API migrations
+        working-directory: api
+        run: python manage.py migrate
+        env:
+          POSTGRES_USER: myuser
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: myproject
+          POSTGRES_PORT: 5432
+          
+      - name: Run API tests
+        working-directory: api
+        run: python manage.py test
+        
