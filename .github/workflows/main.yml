@@ -72,3 +72,7 @@ jobs:
         run: |
           coverage run manage.py test
           coverage report --fail-under=90
+
+      - name: Run API Lint
+        working-directory: api
+        run: pylint --load-plugins pylint_django *.py --fail-under=10

@@ -14,7 +14,7 @@ s.close()
 END
 }
 
-pip install -r requirements
+pip install -r requirements.txt
 
 until function_postgres_ready; do
   >&2 echo "======= POSTGRES IS UNAVAILABLE, WAITING"
