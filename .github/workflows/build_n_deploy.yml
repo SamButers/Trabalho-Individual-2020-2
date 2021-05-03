@@ -15,5 +15,4 @@ jobs:
           heroku_app_name: sambuters-gces
           email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          dockerfile_directory: ./
-          dockerfile_name: docker-compose.yml
+          dockerfile_directory: client
