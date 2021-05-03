@@ -10,7 +10,6 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Build and Deploy
-        if: ${{ github.event_name == 'push' }}
         uses: gonuit/heroku-docker-deploy@v1.3.3
         with:
           heroku_app_name: sambuters-gces
