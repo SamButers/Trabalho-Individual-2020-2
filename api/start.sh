@@ -6,8 +6,6 @@ import socket
 import time
 import os
 
-print('cock and ball torture')
-
 port = int(os.environ["POSTGRES_PORT"])
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -16,7 +14,7 @@ s.close()
 END
 }
 
-pip install django djangorestframework psycopg2 django-cors-headers
+pip install -r requirements
 
 until function_postgres_ready; do
   >&2 echo "======= POSTGRES IS UNAVAILABLE, WAITING"
