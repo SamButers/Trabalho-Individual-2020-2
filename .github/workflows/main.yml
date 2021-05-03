@@ -76,3 +76,12 @@ jobs:
       - name: Run API Lint
         working-directory: api
         run: pylint --load-plugins pylint_django *.py --fail-under=4
+
+      - name: Run API Sonarcloud scan
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: api
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
