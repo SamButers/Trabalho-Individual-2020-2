@@ -9,10 +9,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Build and Deploy
+      - name: Build and Deploy Client
         uses: gonuit/heroku-docker-deploy@v1.3.3
         with:
           heroku_app_name: gces-trabalho-1-sam
           email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           dockerfile_directory: client
+          
+      - name: Build and Deploy API
+        uses: gonuit/heroku-docker-deploy@v1.3.3
+        with:
+          heroku_app_name: gces-trabalho-1-backend
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          dockerfile_directory: api
