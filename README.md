@@ -1,3 +1,6 @@
+![](https://www.code-inspector.com/project/22229/score/svg)
+![](https://www.code-inspector.com/project/22229/status/svg)
+
 # Trabalho Individual 2020.2
 
 
