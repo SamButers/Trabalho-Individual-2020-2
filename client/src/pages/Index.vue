@@ -80,10 +80,14 @@ export default {
       filteredItems: [],
       title: "",
       description: "",
+      apiURL: "",
     };
   },
+  created () {
+    this.apiURL = process.env.API_URL ? process.env.API_URL : 'http://localhost:8000';
+  },
   async beforeMount() {
-    await axios.get('http://localhost:8000/task/')
+    await axios.get(`${this.apiURL}/task/`)
     .then((res) => {
       this.items = res.data;
     })
@@ -95,7 +99,7 @@ export default {
   },
   methods: {
     async complete_task(task) {
-      await axios.delete(`http://localhost:8000/task/delete/${task.pk}/`)
+      await axios.delete(`${this.apiURL}/task/delete/${task.pk}/`)
       .then((res) => {
         this.items = this.items.filter((item) => item.pk !== task.pk);
         this.filterTasks();
@@ -109,7 +113,7 @@ export default {
       this.filteredItems = this.items.filter((item) => item.title.includes(this.text));
     },
     async createNewTask() {
-      await axios.post('http://localhost:8000/task/create/', {
+      await axios.post(`${this.apiURL}/task/create/`, {
         title: this.title,
         description: this.description
       })
